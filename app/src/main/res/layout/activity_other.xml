@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical"
+    tools:context=".OtherActivity">
+
+
+    <Button
+        android:id="@+id/buttonLocation"
+        android:layout_width="118dp"
+        android:layout_height="74dp"
+        android:layout_gravity="center_vertical|center"
+        android:background="@drawable/stadiumicon"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:gravity="top|center"
+        android:onClick="arenaNearMe"
+        android:text="Arena Near Me"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonShareText"
+        android:layout_width="102dp"
+        android:layout_height="102dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/icon_sms"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:gravity="top"
+        android:onClick="shareScoreSMS"
+        android:text="send msg"
+        android:textAlignment="gravity"
+        android:textColorLink="@android:color/holo_blue_bright"
+        android:textDirection="firstStrong"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/buttonDial"
+        android:layout_width="143dp"
+        android:layout_height="79dp"
+        android:layout_gravity="center_vertical|center"
+        android:background="@android:drawable/sym_action_call"
+        android:gravity="top|center_vertical|center"
+        android:text="Call A Friend"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextWeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_med" />
+
+
+</LinearLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/soccer"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Team1"
+            android:layout_width="298dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Juventus" />
+
+        <Button
+            android:id="@+id/Team2"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inter Milan" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/t1score"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:text="Juventus"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t2score"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:text="Inter Milan"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
