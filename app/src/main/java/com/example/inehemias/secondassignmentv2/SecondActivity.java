@@ -2,6 +2,8 @@ package com.example.inehemias.secondassignmentv2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
-import static com.example.inehemias.secondassignmentv2.R.drawable.*;
-import static com.example.inehemias.secondassignmentv2.R.drawable.inter;
+
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -27,16 +28,19 @@ public class SecondActivity extends AppCompatActivity {
     public String winnerTeam=" ";
     public static String TeamName= "winner team";
     public static String dif= "difference";
+    private String favContact;
+    private String favWinnerBackground;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        loadPrefs();
         settingViews();
         extractingData();
         settingMessage();
         settingImage();
-
 
     }
 
@@ -48,7 +52,7 @@ public class SecondActivity extends AppCompatActivity {
 
         if(bundle!=null)
             localDif= bundle.getInt(MainActivity.dif);
-            winnerTeam= bundle.getString(MainActivity.TeamName);
+        winnerTeam= bundle.getString(MainActivity.TeamName);
 
     }
 
@@ -74,17 +78,28 @@ public class SecondActivity extends AppCompatActivity {
     //Sets the corect image depending on who's the winner.
     private void settingImage() {
         //if statement to set team's background
-        if (winnerTeam.contentEquals("Juventus")){
-            imageView.setImageResource(juventus);
+
+
+
+        if (favWinnerBackground.contains("Cup")){
+            imageView.setImageResource(R.drawable.cup_winner);
             winner.setText(winnerTeam);
             difference.setText(messageOut);
 
 
         }
-        else {
-            imageView.setImageResource(inter);
+        else if (favWinnerBackground.contains("thumbsUp")){
+            imageView.setImageResource(R.drawable.thumbs_up);
             winner.setText(winnerTeam);
             difference.setText(messageOut);
+        }
+
+        else {
+            imageView.setImageResource(R.drawable.medal_winner);
+            winner.setText(winnerTeam);
+            difference.setText(messageOut);
+
+
         }
     }
     public void OpenThirdActivity(View view) {
@@ -99,4 +114,12 @@ public class SecondActivity extends AppCompatActivity {
 
 
     }
+
+    private void loadPrefs() {
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        favContact = sharedPrefs.getString("example_text_favorite","9146093982");
+        favWinnerBackground = sharedPrefs.getString("background","");
+
     }
+}

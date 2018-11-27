@@ -1,9 +1,11 @@
 package com.example.inehemias.secondassignmentv2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -22,22 +24,20 @@ public class OtherActivity extends AppCompatActivity {
     private static int localDif=0;
     private static String message =" ";
     private Button callButton;
-    private static String teamName=" ";
-    private String num="address";
-    private String  phoneNumber = "123456789";
-    private TextView getNumber;
+
 
 
 
 
     private static String TAG = "OtherActivity";
+    private String favContact;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other);
         Log.d(TAG, "inside third activity");
         extractingData();
-        getNumber = (TextView) findViewById(R.id.editTextWeb);
         callButton = (Button)findViewById(R.id.buttonDial);
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,13 +55,16 @@ public class OtherActivity extends AppCompatActivity {
 
         if(bundle!=null)
             localDif= bundle.getInt(SecondActivity.dif);
-            message = bundle.getString(SecondActivity.TeamName);
+        message = bundle.getString(SecondActivity.TeamName);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        favContact = sharedPrefs.getString("example_text_favorite","9146093982");
 
     }
 
     public void arenaNearMe(View view) {
         // Search for soccer arena nearby
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=Cricket arena  near me");
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=Soccer arena  near me");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         //mapIntent.setPackage("https://www.google.com/maps/@?api=1&map_action=map");
@@ -71,33 +74,10 @@ public class OtherActivity extends AppCompatActivity {
     }
 
     public void shareScoreSMS(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) // At least KitKat
-        {
-            String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(this); // Need to change the build to API 19
-
-            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-            sendIntent.setType("text/plain");
-            //sendIntent.setData(Uri.parse("smsto:" + phoneNumber));
-            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-
-
-            if (defaultSmsPackageName != null)// Can be null in case that there is no default, then the user would be able to choose
-            // any app that support this intent.
-            {
-                sendIntent.setPackage(defaultSmsPackageName);
-            }
-            startActivity(sendIntent);
-
-        }
-        else // For early versions
-        {
-            Intent smsIntent = new Intent(android.content.Intent.ACTION_VIEW);
-            smsIntent.setType("vnd.android-dir/mms-sms");
-           smsIntent.setData(Uri.parse("smsto: " + phoneNumber));
-            smsIntent.putExtra(teamName,"Good news: "+"message");
-
-            startActivity(smsIntent);
-        }
+        Uri uri = Uri.parse("smsto:"+favContact);
+        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+        it.putExtra("sms_body", message);
+        startActivity(it);
 
     }
 
@@ -105,7 +85,7 @@ public class OtherActivity extends AppCompatActivity {
     public void callAFriend() {
         Log.d(TAG, "inside of callAFriend method");
         Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:"+ phoneNumber));
+        intent.setData(Uri.parse("tel:"+ favContact));
 
         if (intent.resolveActivity(getPackageManager()) != null) {
 
@@ -116,7 +96,7 @@ public class OtherActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{
                         android.Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE );
 
-                }
+            }
             else {
                 startActivity(intent);
             }
