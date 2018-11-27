@@ -118,7 +118,7 @@ public class SecondActivity extends AppCompatActivity {
     private void loadPrefs() {
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        favContact = sharedPrefs.getString("example_text_favorite","9146093982");
+        favContact = sharedPrefs.getString("example_text_favorite","");
         favWinnerBackground = sharedPrefs.getString("background","");
 
     }

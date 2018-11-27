@@ -6,7 +6,7 @@
 
 <header
     android:fragment="com.example.inehemias.secondassignmentv2.SettingsActivity$GeneralPreferenceFragment"
-    android:icon="@drawable/ic_info_black_24dp"
+    android:icon="@drawable/ic_settings_black_24dp"
     android:title="@string/pref_header_general" />
 
 <header
@@ -21,17 +21,17 @@
 
 <header
     android:fragment="com.example.inehemias.secondassignmentv2.SettingsActivity$PrefSportFragment"
-    android:icon="@drawable/ic_info_black_24dp"
+    android:icon="@drawable/ic_favorite_black_24dp"
     android:title="@string/pref_title_game_settings" />
 
 <header
     android:fragment="com.example.inehemias.secondassignmentv2.SettingsActivity$PrefBackgroundFragment"
-    android:icon="@drawable/ic_info_black_24dp"
+    android:icon="@drawable/ic_settings_system_daydream_green_24dp"
     android:title="Chose Favorite Winner Background" />
 
 <header
     android:fragment="com.example.inehemias.secondassignmentv2.SettingsActivity$PrefFavoriteTeamFragment"
-    android:icon="@drawable/ic_info_black_24dp"
+    android:icon="@drawable/ic_star_blue_24dp"
     android:title="Chose Favorite Team" />
 
 </preference-headers>
