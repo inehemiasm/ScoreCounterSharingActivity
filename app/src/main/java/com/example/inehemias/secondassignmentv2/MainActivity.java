@@ -8,13 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
 
     private Button Team1;
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private String notFavTeam="Team 2";
     private String favSport="none";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
         clickListeners();
         setPrefs();
         setBackground();
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        loadPrefs();
+        setters();
+        clickListeners();
+        setPrefs();
+        setBackground();
+
 
     }
 
@@ -202,7 +218,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-
-
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }
